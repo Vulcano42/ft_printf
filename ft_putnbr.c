@@ -6,7 +6,7 @@
 /*   By: thialima <thialima@student.42.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 22:43:37 by thialima          #+#    #+#             */
-/*   Updated: 2026/07/22 23:30:34 by thialima         ###   ########.fr       */
+/*   Updated: 2026/07/23 20:01:00 by thialima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_putnbr(long nb)
 		nb = -nb;
 	}
 	if (nb >= 10)
-		ft_putnbr(nb /10);
+		ft_putnbr(nb / 10);
 	c = (nb % 10) + '0';
 	write (1, &c, 1);
 }

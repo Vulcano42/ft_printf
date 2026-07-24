@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thialima <thialima@student.42.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/22 04:12:26 by thialima          #+#    #+#             */
-/*   Updated: 2026/07/23 19:58:11 by thialima         ###   ########.fr       */
+/*   Created: 2026/07/24 00:52:34 by thialima          #+#    #+#             */
+/*   Updated: 2026/07/24 00:53:02 by thialima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	ft_putstr(char *str)
+# include <unistd.h>
+# include <stdarg.h>
 
-{
-	int	i;
+int	ft_printf(const char *format, ...);
 
-	if (!str)
-	{
-		write (1, "(null)", 6);
-		return (6);
-	}
-	i = 0;
-	while (str[i])
-		i++;
-	write (1, str, i);
-	return (i);
-}
+int	ft_conversion(const char type, va_list vargs);
+
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_putnbr(long nbr);
+int	ft_putptr(void *ptr);
+int	ft_brazil_dream(unsigned long nbr, char up);
+
+#endif

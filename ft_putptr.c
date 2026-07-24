@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thialima <thialima@student.42.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/22 04:12:26 by thialima          #+#    #+#             */
-/*   Updated: 2026/07/23 19:58:11 by thialima         ###   ########.fr       */
+/*   Created: 2026/07/23 20:01:30 by thialima          #+#    #+#             */
+/*   Updated: 2026/07/23 22:19:31 by thialima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
-int	ft_putstr(char *str)
-
+int	ft_putptr(void *ptr)
 {
-	int	i;
+	int	len;
+	int	aux;
 
-	if (!str)
-	{
-		write (1, "(null)", 6);
-		return (6);
-	}
-	i = 0;
-	while (str[i])
-		i++;
-	write (1, str, i);
-	return (i);
+	len = 0;
+	aux = 0;
+	if (!ptr)
+		return (ft_putstr("(nil)"));
+	ft_putstr("0x");
+	len += 2;
+	aux = ft_brazil_dream((unsigned long)ptr, 'x');
+	len += aux;
+	return (len);
 }

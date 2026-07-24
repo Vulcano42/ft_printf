@@ -6,20 +6,14 @@
 /*   By: thialima <thialima@student.42.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 22:34:04 by thialima          #+#    #+#             */
-/*   Updated: 2026/07/22 22:42:37 by thialima         ###   ########.fr       */
+/*   Updated: 2026/07/23 19:56:42 by thialima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int ft_putchar (int c)
-
-{
-	return (write (1,&c,1));
-}
-
-int main (void)
+int	ft_putchar(int c)
 
 {
-	ft_putchar(86);
+	return (write (1, &c, 1));
 }
