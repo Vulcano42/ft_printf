@@ -6,9 +6,11 @@
 /*   By: thialima <thialima@student.42.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 16:11:25 by thialima          #+#    #+#             */
-/*   Updated: 2026/07/24 00:39:11 by thialima         ###   ########.fr       */
+/*   Updated: 2026/07/24 21:16:51 by thialima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_printf.h"
 
 int	ft_printf(char const *str, ...)
 {

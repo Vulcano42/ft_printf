@@ -6,9 +6,10 @@
 /*   By: thialima <thialima@student.42.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 21:55:54 by thialima          #+#    #+#             */
-/*   Updated: 2026/07/23 22:11:00 by thialima         ###   ########.fr       */
+/*   Updated: 2026/07/24 19:09:12 by thialima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "ft_printf.h"
 
 int	ft_brazil_dream(unsigned long nbr, char up)
 

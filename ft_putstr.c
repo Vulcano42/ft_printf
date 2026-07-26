@@ -6,12 +6,11 @@
 /*   By: thialima <thialima@student.42.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 04:12:26 by thialima          #+#    #+#             */
-/*   Updated: 2026/07/23 19:58:11 by thialima         ###   ########.fr       */
+/*   Updated: 2026/07/24 17:00:32 by thialima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "ft_printf.h"
 
 int	ft_putstr(char *str)
 

@@ -6,11 +6,11 @@
 /*   By: thialima <thialima@student.42.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 20:01:30 by thialima          #+#    #+#             */
-/*   Updated: 2026/07/23 22:19:31 by thialima         ###   ########.fr       */
+/*   Updated: 2026/07/24 16:59:58 by thialima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "ft_printf.h"
 
 int	ft_putptr(void *ptr)
 {
