@@ -8,25 +8,23 @@ A custom implementation of the standard C `printf()` function.
 
 # Description
 
-`ft_printf` is a reimplementation of the standard C library function `printf()`. The objective of this project is to reproduce the behavior of the original function while gaining a deeper understanding of variadic functions, formatted output, recursion, and low-level I/O through the `write()` system call.
+`ft_printf` is a reimplementation of the standard C library function `printf()`. Its goal is to reproduce the behavior of the original function while providing a deeper understanding of variadic functions, recursion, formatted output, pointers and low-level I/O using the `write()` system call.
 
-Unlike the original implementation from the C standard library, this project is built entirely from scratch using only the functions allowed by the 42 subject.
+The implementation supports the mandatory conversions:
 
-The project supports the following conversion specifiers:
+| Specifier | Description |
+|-----------|-------------|
+| `%c` | Character |
+| `%s` | String |
+| `%p` | Pointer |
+| `%d` | Signed decimal |
+| `%i` | Signed integer |
+| `%u` | Unsigned decimal |
+| `%x` | Lowercase hexadecimal |
+| `%X` | Uppercase hexadecimal |
+| `%%` | Percent sign |
 
-| Specifier | Description              |
-| --------- | ------------------------ |
-| `%c`      | Character                |
-| `%s`      | String                   |
-| `%p`      | Pointer address          |
-| `%d`      | Signed decimal integer   |
-| `%i`      | Signed integer           |
-| `%u`      | Unsigned decimal integer |
-| `%x`      | Lowercase hexadecimal    |
-| `%X`      | Uppercase hexadecimal    |
-| `%%`      | Percent sign             |
-
-Hexadecimal numbers (`%x` and `%X`) are printed by the function **`ft_brazil_dream()`** *(which replaces the traditional `ft_puthexa()` implementation commonly found in ft_printf projects).*
+Hexadecimal conversions (`%x` and `%X`) are handled by **`ft_brazil_dream()`** *(a custom implementation that replaces the traditional `ft_puthexa()` function commonly used in ft_printf projects).*
 
 ---
 
@@ -52,16 +50,19 @@ Hexadecimal numbers (`%x` and `%X`) are printed by the function **`ft_brazil_dre
 
 # How It Works
 
-The execution begins in `ft_printf()`, which scans the format string one character at a time.
+`ft_printf()` scans the format string from left to right.
 
-* Ordinary characters are written directly using `write()`.
-* Whenever a `%` character is found, the next character is interpreted as a conversion specifier.
-* The specifier is passed to `ft_conversion()`.
-* `ft_conversion()` dispatches the request to the appropriate printing function.
-* Each printing function returns the number of characters written.
-* `ft_printf()` accumulates these values and finally returns the total number of printed characters.
+- Ordinary characters are printed immediately using `write()`.
+- When `%` is found, the next character is interpreted as a conversion specifier.
+- `ft_conversion()` dispatches the request to the appropriate helper function.
+- Each helper returns the number of printed characters.
+- `ft_printf()` accumulates the total and returns it.
 
-The implementation closely follows the behavior of the standard `printf()` while keeping the code modular and easy to maintain.
+The diagram below summarizes the execution flow.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Vulcano42/assets/main/floxograma_ft_printf.png" alt="ft_printf Flowchart" width="900">
+</p>
 
 ---
 
@@ -69,86 +70,80 @@ The implementation closely follows the behavior of the standard `printf()` while
 
 ## Algorithm
 
-This implementation uses a **single-pass parsing algorithm**.
+The implementation uses a **single-pass parsing algorithm**.
 
-The format string is traversed only once from left to right.
+The format string is traversed only once.
 
-For each character:
-
-1. If it is not `%`, print it immediately.
-2. If it is `%`, read the next character.
-3. Identify the conversion type.
-4. Call the corresponding helper function.
-5. Add the returned length to the total.
+1. Read one character.
+2. Print it if it is not `%`.
+3. Otherwise identify the conversion.
+4. Call the appropriate helper.
+5. Add the returned length.
 6. Continue until the end of the string.
 
-Because each character is processed exactly once, the parser itself runs in **O(n)** time, where **n** is the length of the format string.
+This gives the parser a time complexity of **O(n)**.
 
-Numeric conversions (`ft_putnbr()`, `ft_put_unsigned_nbr()` and `ft_brazil_dream()`) are implemented recursively, producing digits from the most significant to the least significant.
-
----
+Integer, unsigned integer and hexadecimal conversions are implemented recursively.
 
 ## Data Structure
 
-No complex data structures are required for this project.
+No complex data structures are required.
 
-The implementation relies only on:
+The project relies only on:
 
-* `va_list` for accessing variable arguments.
-* Recursive function calls for numeric conversion.
-* Character pointers for traversing strings.
-* Local stack variables for counters and temporary values.
+- `va_list`
+- Recursion
+- Character pointers
+- Stack variables
 
-No dynamic memory allocation is performed, making the implementation lightweight and memory efficient.
+No dynamic memory allocation is performed.
 
 ---
 
 # Function Overview
 
-| Function                | Purpose                                                                      |
-| ----------------------- | ---------------------------------------------------------------------------- |
-| `ft_printf()`           | Main entry point. Parses the format string.                                  |
-| `ft_conversion()`       | Dispatches conversion specifiers to the correct function.                    |
-| `ft_putchar()`          | Prints one character.                                                        |
-| `ft_putstr()`           | Prints a string.                                                             |
-| `ft_putnbr()`           | Prints signed integers recursively.                                          |
-| `ft_put_unsigned_nbr()` | Prints unsigned integers recursively.                                        |
-| `ft_putptr()`           | Prints memory addresses (`0x...` or `(nil)`).                                |
-| `ft_brazil_dream()`     | Prints hexadecimal numbers (replacement for the traditional `ft_puthexa()`). |
+| Function | Responsibility |
+|----------|----------------|
+| `ft_printf()` | Parses the format string. |
+| `ft_conversion()` | Dispatches conversion specifiers. |
+| `ft_putchar()` | Prints one character. |
+| `ft_putstr()` | Prints strings. |
+| `ft_putnbr()` | Prints signed integers. |
+| `ft_put_unsigned_nbr()` | Prints unsigned integers. |
+| `ft_putptr()` | Prints pointers. |
+| `ft_brazil_dream()` | Prints hexadecimal values (replacement for `ft_puthexa()`). |
 
 ---
 
 # Instructions
 
-This project is a **static library** and therefore **does not contain a `main()` function**.
+This project builds a **static library** and therefore **does not include a `main()` function**.
 
-Compilation is handled entirely by the provided **Makefile**.
-
-## Build
+Build:
 
 ```bash
 make
 ```
 
-This generates:
+Output:
 
 ```text
 libftprintf.a
 ```
 
-## Remove object files
+Clean object files:
 
 ```bash
 make clean
 ```
 
-## Remove all generated files
+Remove generated files:
 
 ```bash
 make fclean
 ```
 
-## Rebuild the project
+Rebuild:
 
 ```bash
 make re
@@ -158,16 +153,12 @@ make re
 
 # Technical Choices
 
-Some implementation choices include:
-
-* Recursive algorithms for integer and hexadecimal printing.
-* Modular architecture with one responsibility per function.
-* Direct use of the `write()` system call.
-* Immediate error propagation whenever a write operation fails.
-* No heap allocation.
-* Simple dispatcher (`ft_conversion()`) for conversion routing.
-
-These choices keep the code compact, readable and compliant with the 42 coding standards.
+- One helper function per conversion.
+- Recursive number conversion.
+- Direct use of `write()`.
+- Immediate error propagation.
+- Modular design.
+- No heap allocation.
 
 ---
 
@@ -175,35 +166,22 @@ These choices keep the code compact, readable and compliant with the 42 coding s
 
 ## Documentation
 
-* The Open Group — `printf()`
-  https://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html
-
-* Linux Manual Pages
-  https://man7.org/linux/man-pages/man3/printf.3.html
-
-* Linux Manual Pages — `write()`
-  https://man7.org/linux/man-pages/man2/write.2.html
-
-* cppreference
-  https://en.cppreference.com/w/c/io/fprintf
-
----
+- https://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html
+- https://man7.org/linux/man-pages/man3/printf.3.html
+- https://man7.org/linux/man-pages/man2/write.2.html
+- https://en.cppreference.com/w/c/io/fprintf
 
 ## AI Usage
 
-Artificial Intelligence (OpenAI ChatGPT) was used exclusively as a learning and review tool during the development of this project.
+OpenAI ChatGPT was used as a learning and documentation assistant for:
 
-AI assisted with:
+- understanding variadic functions;
+- reviewing recursive algorithms;
+- discussing hexadecimal conversion;
+- improving documentation;
+- reviewing code.
 
-* understanding variadic functions (`va_list`);
-* reviewing recursive algorithms;
-* discussing hexadecimal conversion;
-* explaining pointer manipulation;
-* reviewing C syntax;
-* identifying edge cases;
-* improving documentation.
-
-All source code, debugging, testing, and validation were performed manually by the author.
+All implementation, debugging and testing were performed manually by the project author.
 
 ---
 
@@ -217,5 +195,4 @@ All source code, debugging, testing, and validation were performed manually by t
 
 # License
 
-This repository is intended exclusively for educational purposes as part of the 42 curriculum.
-
+This repository was developed for educational purposes as part of the 42 curriculum.
